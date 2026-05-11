@@ -1,0 +1,335 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
+import DashboardMockup from '../components/DashboardMockup.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+import StatusBadge from '../components/StatusBadge.astro';
+import ComparisonRow from '../components/ComparisonRow.astro';
+---
+
+<Layout>
+  <!-- TOP NAV -->
+  <header class="border-b border-line">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+      <Logo />
+      <div class="flex items-center gap-6">
+        <a
+          href="https://twitter.com/kubesentry"
+          target="_blank"
+          rel="noopener"
+          class="hidden text-sm text-text-dim transition hover:text-text sm:block"
+        >
+          building in public →
+        </a>
+        <StatusBadge />
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto max-w-7xl px-6 pb-16 pt-20 sm:pt-28">
+      <!-- Status / availability marker -->
+      <div
+        class="mb-8 inline-flex items-center gap-2 rounded-full border border-line bg-bg-elevated/60 px-4 py-1.5 text-xs font-medium backdrop-blur-sm"
+        style="animation: fadeInUp 0.6s 0.05s both;"
+      >
+        <span class="relative flex h-2 w-2">
+          <span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"
+          ></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+        </span>
+        <span class="text-text-dim">
+          <span class="text-text">Coming Q2 2026</span>
+          <span class="mx-2 text-line">·</span>
+          early access opens soon
+        </span>
+      </div>
+
+      <!-- Headline -->
+      <h1
+        class="max-w-4xl text-balance font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
+        style="animation: fadeInUp 0.8s 0.15s both;"
+      >
+        <span class="text-text">Catch threats in your</span>
+        <br />
+        <span class="relative inline-block">
+          <span class="text-accent">Kubernetes cluster</span>
+          <svg
+            class="absolute -bottom-2 left-0 w-full"
+            viewBox="0 0 400 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 9C50 3 150 3 200 6C250 9 350 9 398 4"
+              stroke="#00ff9c"
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity="0.4"
+            />
+          </svg>
+        </span>
+        <br />
+        <span class="text-text">before they catch you.</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p
+        class="mt-8 max-w-2xl text-balance text-lg leading-relaxed text-text-dim sm:text-xl"
+        style="animation: fadeInUp 0.8s 0.3s both;"
+      >
+        Runtime threat detection built on Falco. Curated rules, smart
+        deduplication, beautiful email reports. Self-hosted, air-gapped, your
+        data stays in your cluster.
+      </p>
+
+      <!-- Feature badges -->
+      <div
+        class="mt-10 flex flex-wrap gap-3"
+        style="animation: fadeInUp 0.8s 0.45s both;"
+      >
+        {
+          [
+            '⎈ Helm install',
+            '🔒 Self-hosted',
+            '✨ AI-summarized alerts',
+            '💾 One-time license',
+            '🔧 No phone home',
+          ].map((badge) => (
+            <span class="rounded-full border border-line bg-bg-elevated/40 px-4 py-1.5 font-mono text-xs text-text-dim">
+              {badge}
+            </span>
+          ))
+        }
+      </div>
+
+      <!-- Email signup -->
+      <div class="mt-12 max-w-xl" style="animation: fadeInUp 0.8s 0.6s both;">
+        <EmailSignup />
+        <p class="mt-3 font-mono text-xs text-text-faint">
+          Get notified at launch. Early supporters get $20 off. No spam, no
+          tracking, unsubscribe anytime.
+        </p>
+      </div>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="relative mx-auto max-w-7xl px-6 pb-32">
+      <div
+        class="relative"
+        style="animation: fadeInUp 1s 0.8s both;"
+      >
+        <!-- Glow behind dashboard -->
+        <div
+          class="absolute -inset-x-10 -top-10 -bottom-10 bg-gradient-to-b from-accent/10 via-transparent to-transparent blur-3xl"
+          aria-hidden="true"
+        ></div>
+        <DashboardMockup />
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="relative border-t border-line py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-16">
+        <div class="mb-4 font-mono text-xs uppercase tracking-widest text-accent">
+          // how it works
+        </div>
+        <h2
+          class="max-w-3xl text-balance font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl"
+        >
+          From <span class="text-accent">helm install</span> to first alert in under 5 minutes.
+        </h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        <!-- Step 1 -->
+        <div class="group relative overflow-hidden rounded-xl border border-line bg-bg-elevated/30 p-6 transition hover:border-accent/30">
+          <div class="mb-6 flex items-center justify-between">
+            <span class="font-mono text-xs text-text-faint">01</span>
+            <span class="rounded-full bg-bg px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-text-dim">
+              install
+            </span>
+          </div>
+          <div class="mb-4 rounded-lg border border-line bg-bg/60 p-4 font-mono text-sm">
+            <div class="text-text-dim">$ helm install kubesentry \</div>
+            <div class="text-text-dim">&nbsp;&nbsp;&nbsp;&nbsp;kubesentry/kubesentry</div>
+          </div>
+          <h3 class="mb-2 font-display font-semibold text-text">One-command install</h3>
+          <p class="text-sm leading-relaxed text-text-dim">
+            Falco + collector + dashboard + alerter — all deployed via one Helm chart.
+            Works on any K8s distro.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="group relative overflow-hidden rounded-xl border border-line bg-bg-elevated/30 p-6 transition hover:border-accent/30">
+          <div class="mb-6 flex items-center justify-between">
+            <span class="font-mono text-xs text-text-faint">02</span>
+            <span class="rounded-full bg-bg px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-text-dim">
+              detect
+            </span>
+          </div>
+          <div class="mb-4 space-y-1.5 rounded-lg border border-line bg-bg/60 p-4 font-mono text-xs">
+            <div class="flex items-center gap-2">
+              <span class="h-1.5 w-1.5 rounded-full bg-danger"></span>
+              <span class="text-text">Reverse shell in pod/payments-api</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="h-1.5 w-1.5 rounded-full bg-warn"></span>
+              <span class="text-text-dim">RBAC modification detected</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+              <span class="text-text-dim">Privileged container started</span>
+            </div>
+          </div>
+          <h3 class="mb-2 font-display font-semibold text-text">Curated rules</h3>
+          <p class="text-sm leading-relaxed text-text-dim">
+            50+ hand-picked Falco rules tuned for low false positives.
+            Crypto miners, reverse shells, privilege escalation, lateral movement.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="group relative overflow-hidden rounded-xl border border-line bg-bg-elevated/30 p-6 transition hover:border-accent/30">
+          <div class="mb-6 flex items-center justify-between">
+            <span class="font-mono text-xs text-text-faint">03</span>
+            <span class="rounded-full bg-bg px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-text-dim">
+              alert
+            </span>
+          </div>
+          <div class="mb-4 rounded-lg border border-line bg-bg/60 p-4 font-mono text-xs">
+            <div class="text-accent">→ Slack</div>
+            <div class="mt-1 text-accent">→ Email digest</div>
+            <div class="mt-1 text-accent">→ Discord / Teams</div>
+            <div class="mt-1 text-text-faint">→ Custom webhook</div>
+          </div>
+          <h3 class="mb-2 font-display font-semibold text-text">Actionable alerts</h3>
+          <p class="text-sm leading-relaxed text-text-dim">
+            Critical events fire instantly. Daily digests roll up the noise.
+            Every alert ships with context and a remediation playbook.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="relative border-t border-line py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="grid gap-16 md:grid-cols-2 md:items-center">
+        <div>
+          <div class="mb-4 font-mono text-xs uppercase tracking-widest text-accent">
+            // why kubesentry
+          </div>
+          <h2 class="font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+            Enterprise security <br />
+            <span class="text-text-dim line-through decoration-danger/70 decoration-2">at enterprise prices.</span>
+            <br />
+            <span class="text-accent">for $99.</span>
+          </h2>
+          <p class="mt-6 max-w-lg text-lg leading-relaxed text-text-dim">
+            Datadog. Sysdig. Aqua. Built for enterprises with security teams.
+            KubeSentry is built for the rest of us — the solo founder, the
+            two-person platform team, the agency running clusters for clients.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <ComparisonRow them="Datadog Cloud Security" themPrice="$15+/host/mo" mine="KubeSentry" minePrice="$99 one-time" />
+          <ComparisonRow them="Sysdig Secure" themPrice="$60+/host/mo" mine="KubeSentry" minePrice="$99 one-time" />
+          <ComparisonRow them="Aqua Enterprise" themPrice="$Contact sales" mine="KubeSentry" minePrice="$99 one-time" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="relative border-t border-line py-24">
+    <div class="mx-auto max-w-3xl px-6">
+      <div class="mb-12">
+        <div class="mb-4 font-mono text-xs uppercase tracking-widest text-accent">
+          // questions
+        </div>
+        <h2 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+          You probably want to know.
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {
+          [
+            {
+              q: 'Is this just a Falco wrapper?',
+              a: "Falco is the engine — open source, world-class, and free. KubeSentry is the experience around it: a curated ruleset with low false positives, smart deduplication, a clean dashboard, beautiful email digests, multi-channel alerting, and remediation playbooks for every alert. Think of it as 'managed Falco you actually self-host.'",
+            },
+            {
+              q: 'Why one-time pricing?',
+              a: "Because subscription fatigue is real. You pay once, install on your cluster, and own it. Updates included for 6-12 months depending on tier. After that, optional $49/year for new rules and features.",
+            },
+            {
+              q: 'Does it phone home?',
+              a: 'No. Air-gapped friendly. License keys are validated offline with cryptographic signatures. Your alerts and cluster data never leave your infrastructure.',
+            },
+            {
+              q: 'What about Wazuh / Tetragon / Kubescape?',
+              a: 'They\'re great tools. Wazuh is a full SIEM (heavyweight). Tetragon is powerful but low-level. Kubescape focuses on posture, not runtime. KubeSentry is opinionated and focused: real-time threat detection with zero setup pain. If you want to combine — go for it.',
+            },
+            {
+              q: 'When does it launch?',
+              a: 'Targeting Q2 2026. Sign up above for early access — first 50 people get $20 off and priority support.',
+            },
+          ].map((item) => (
+            <details class="group rounded-xl border border-line bg-bg-elevated/30 transition hover:border-line/80">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 p-5 font-display font-medium text-text marker:hidden [&::-webkit-details-marker]:hidden">
+                {item.q}
+                <span class="font-mono text-accent transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <div class="border-t border-line px-5 py-4 text-sm leading-relaxed text-text-dim">
+                {item.a}
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-line py-12">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 sm:flex-row">
+      <div class="flex items-center gap-3">
+        <Logo />
+      </div>
+      <div class="flex items-center gap-6 font-mono text-xs text-text-faint">
+        <a
+          href="https://twitter.com/kubesentry"
+          target="_blank"
+          rel="noopener"
+          class="transition hover:text-text"
+        >
+          Twitter
+        </a>
+        <a
+          href="https://github.com/kubesentry"
+          target="_blank"
+          rel="noopener"
+          class="transition hover:text-text"
+        >
+          GitHub
+        </a>
+        <span>© 2026 KubeSentry</span>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<!-- Comparison row component (defined inline since used only here) -->
+<script>
+  // Intentionally empty — components are server-rendered
+</script>

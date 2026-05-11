@@ -1,0 +1,39 @@
+---
+// Logo: hexagon (Kubernetes ref) with a stylized "S" inside, mono wordmark next to it.
+---
+
+<a href="/" class="group flex items-center gap-2.5">
+  <div class="relative">
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="transition-transform group-hover:rotate-[30deg]"
+    >
+      <!-- Outer hex -->
+      <path
+        d="M14 1.5L25.5 8V20L14 26.5L2.5 20V8L14 1.5Z"
+        stroke="#00ff9c"
+        stroke-width="1.5"
+        stroke-linejoin="round"
+      />
+      <!-- Inner accent -->
+      <path
+        d="M14 7L20.5 10.75V18.25L14 22L7.5 18.25V10.75L14 7Z"
+        fill="#00ff9c"
+        fill-opacity="0.1"
+      />
+      <!-- Central dot -->
+      <circle cx="14" cy="14" r="2" fill="#00ff9c" />
+    </svg>
+    <div
+      class="absolute inset-0 -z-10 rounded-full bg-accent/30 blur-md opacity-60 group-hover:opacity-100 transition-opacity"
+      aria-hidden="true"
+    ></div>
+  </div>
+  <span class="font-display text-lg font-semibold tracking-tight">
+    <span class="text-text">kube</span><span class="text-accent">sentry</span>
+  </span>
+</a>

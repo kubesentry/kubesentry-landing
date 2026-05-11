@@ -1,0 +1,114 @@
+---
+// Dashboard mockup — a fake-but-believable preview of the KubeSentry UI.
+// Built entirely in HTML/Tailwind so it scales, no images needed.
+import StatCard from './StatCard.astro';
+import AlertRow from './AlertRow.astro';
+---
+
+<div class="relative overflow-hidden rounded-2xl border border-line bg-bg-elevated shadow-2xl glow-accent">
+  <!-- Window chrome -->
+  <div class="flex items-center justify-between border-b border-line bg-bg/60 px-4 py-3">
+    <div class="flex items-center gap-2">
+      <div class="flex gap-1.5">
+        <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+        <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+        <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+      </div>
+      <div class="ml-4 hidden items-center gap-2 rounded-md bg-bg px-3 py-1 font-mono text-xs text-text-dim sm:flex">
+        <svg class="h-3 w-3 text-accent" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.5">
+          <path d="M3.5 6.5l2 2 3-4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        kubesentry.local
+      </div>
+    </div>
+    <div class="font-mono text-[10px] text-text-faint">
+      <span class="hidden md:inline">cluster: production-eu</span>
+      <span class="ml-2 inline-flex items-center gap-1">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-accent"></span>
+        live
+      </span>
+    </div>
+  </div>
+
+  <!-- Layout: sidebar + main -->
+  <div class="grid grid-cols-12">
+    <!-- Sidebar -->
+    <aside class="col-span-12 border-r border-line bg-bg/40 p-4 md:col-span-2">
+      <div class="mb-6 font-mono text-[10px] uppercase tracking-widest text-text-faint">
+        Navigation
+      </div>
+      <nav class="space-y-1 font-mono text-xs">
+        <a class="flex items-center gap-2 rounded-md bg-accent/10 px-3 py-2 text-accent">
+          <span>▸</span> Alerts
+          <span class="ml-auto rounded-full bg-accent/20 px-1.5 py-0.5 text-[10px]">12</span>
+        </a>
+        <a class="flex items-center gap-2 rounded-md px-3 py-2 text-text-dim">
+          <span class="text-text-faint">▸</span> Overview
+        </a>
+        <a class="flex items-center gap-2 rounded-md px-3 py-2 text-text-dim">
+          <span class="text-text-faint">▸</span> Rules
+        </a>
+        <a class="flex items-center gap-2 rounded-md px-3 py-2 text-text-dim">
+          <span class="text-text-faint">▸</span> Settings
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="col-span-12 p-4 md:col-span-10 md:p-6">
+      <!-- Stat cards row -->
+      <div class="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+        <StatCard label="Critical" value="2" trend="+1" color="danger" />
+        <StatCard label="High" value="5" trend="+3" color="warn" />
+        <StatCard label="Medium" value="12" trend="−4" color="text" />
+        <StatCard label="Suppressed" value="847" trend="dedup" color="dim" />
+      </div>
+
+      <!-- Alerts table header -->
+      <div class="mb-3 flex items-center justify-between">
+        <h3 class="font-display text-sm font-semibold">Recent alerts <span class="text-text-faint">— last 24h</span></h3>
+        <div class="flex gap-2 font-mono text-[10px]">
+          <span class="rounded-md border border-line px-2 py-1 text-text-dim">⌘ K</span>
+          <span class="hidden rounded-md border border-line px-2 py-1 text-text-dim sm:inline">filter</span>
+        </div>
+      </div>
+
+      <!-- Alerts table -->
+      <div class="overflow-hidden rounded-lg border border-line bg-bg/40">
+        <table class="w-full font-mono text-xs">
+          <thead>
+            <tr class="border-b border-line bg-bg/40 text-left text-[10px] uppercase tracking-wider text-text-faint">
+              <th class="px-3 py-2 font-medium">Severity</th>
+              <th class="px-3 py-2 font-medium">Rule</th>
+              <th class="hidden px-3 py-2 font-medium sm:table-cell">Pod / Namespace</th>
+              <th class="hidden px-3 py-2 font-medium md:table-cell">Time</th>
+              <th class="px-3 py-2 font-medium">×</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line text-text">
+            <AlertRow severity="critical" rule="Reverse shell in container" pod="payments-api-7d8f" ns="prod" time="2m" count="1" />
+            <AlertRow severity="critical" rule="Crypto mining process detected" pod="redis-cache-2k" ns="cache" time="14m" count="3" />
+            <AlertRow severity="high" rule="Privileged container started" pod="debug-tools-x" ns="ops" time="1h" count="1" />
+            <AlertRow severity="high" rule="Sensitive file accessed" pod="api-gateway-9" ns="prod" time="2h" count="6" />
+            <AlertRow severity="high" rule="RBAC role modified" pod="kube-api-proxy" ns="kube-system" time="3h" count="1" />
+            <AlertRow severity="medium" rule="Unusual outbound connection" pod="worker-batch-3" ns="jobs" time="4h" count="2" />
+            <AlertRow severity="medium" rule="Container drift detected" pod="user-service-1" ns="prod" time="5h" count="1" />
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Footer of mockup: terminal hint -->
+      <div class="mt-4 hidden rounded-md border border-line bg-bg/40 px-3 py-2 font-mono text-[10px] text-text-faint md:block">
+        <span class="text-accent">i</span> Showing 7 of 12. Press <span class="text-text">⌘ K</span> to search, <span class="text-text">f</span> to filter by namespace.
+      </div>
+    </main>
+  </div>
+
+  <!-- Decorative corner glow -->
+  <div class="pointer-events-none absolute -bottom-32 -right-32 h-64 w-64 rounded-full bg-accent/10 blur-3xl"></div>
+</div>
+
+<!-- ─── INLINE COMPONENTS ─── -->
+<style>
+  /* none — fully Tailwind */
+</style>

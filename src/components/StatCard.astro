@@ -1,0 +1,31 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  trend: string;
+  color: 'danger' | 'warn' | 'text' | 'dim';
+}
+
+const { label, value, trend, color } = Astro.props;
+
+const colorMap = {
+  danger: 'text-danger',
+  warn: 'text-warn',
+  text: 'text-text',
+  dim: 'text-text-dim',
+};
+
+const valueColor = colorMap[color];
+---
+
+<div class="rounded-lg border border-line bg-bg/40 p-3">
+  <div class="flex items-center justify-between">
+    <span class="font-mono text-[10px] uppercase tracking-wider text-text-faint">
+      {label}
+    </span>
+    <span class="font-mono text-[10px] text-text-faint">{trend}</span>
+  </div>
+  <div class={`mt-2 font-display text-2xl font-semibold tabular-nums ${valueColor}`}>
+    {value}
+  </div>
+</div>

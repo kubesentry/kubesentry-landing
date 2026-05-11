@@ -1,0 +1,37 @@
+---
+interface Props {
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  rule: string;
+  pod: string;
+  ns: string;
+  time: string;
+  count: string;
+}
+
+const { severity, rule, pod, ns, time, count } = Astro.props;
+
+const severityStyles = {
+  critical: { dot: 'bg-danger', text: 'text-danger', label: 'CRIT' },
+  high: { dot: 'bg-warn', text: 'text-warn', label: 'HIGH' },
+  medium: { dot: 'bg-accent', text: 'text-accent', label: 'MED' },
+  low: { dot: 'bg-text-dim', text: 'text-text-dim', label: 'LOW' },
+};
+
+const sev = severityStyles[severity];
+---
+
+<tr class="transition hover:bg-bg/40">
+  <td class="px-3 py-2.5">
+    <span class="inline-flex items-center gap-2">
+      <span class={`h-1.5 w-1.5 rounded-full ${sev.dot}`}></span>
+      <span class={`font-medium ${sev.text}`}>{sev.label}</span>
+    </span>
+  </td>
+  <td class="px-3 py-2.5 text-text">{rule}</td>
+  <td class="hidden px-3 py-2.5 text-text-dim sm:table-cell">
+    <span class="text-text">{pod}</span>
+    <span class="text-text-faint"> · {ns}</span>
+  </td>
+  <td class="hidden px-3 py-2.5 text-text-faint md:table-cell">{time} ago</td>
+  <td class="px-3 py-2.5 text-text-faint">{count}</td>
+</tr>

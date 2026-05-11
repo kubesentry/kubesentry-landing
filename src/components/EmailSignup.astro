@@ -1,0 +1,101 @@
+---
+// Email signup. By default this works as a static form.
+// To wire up: replace the action URL with your ConvertKit/Buttondown form endpoint.
+// For now: handles client-side with a friendly success message.
+---
+
+<form
+  id="signup-form"
+  class="flex flex-col gap-3 sm:flex-row"
+  novalidate
+>
+  <div class="relative flex-1">
+    <label for="email" class="sr-only">Email address</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="you@startup.com"
+      class="w-full rounded-lg border border-line bg-bg-elevated/60 px-4 py-3 font-mono text-sm text-text placeholder-text-faint backdrop-blur-sm transition focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
+    />
+  </div>
+  <button
+    type="submit"
+    class="group relative overflow-hidden rounded-lg bg-accent px-6 py-3 font-mono text-sm font-semibold text-bg transition-all hover:bg-accent-dim active:scale-[0.98] disabled:opacity-50"
+  >
+    <span class="relative z-10 flex items-center justify-center gap-2">
+      Get early access
+      <span class="transition-transform group-hover:translate-x-0.5">→</span>
+    </span>
+  </button>
+</form>
+
+<div
+  id="signup-success"
+  class="mt-4 hidden rounded-lg border border-accent/40 bg-accent/5 px-4 py-3 font-mono text-sm text-accent"
+>
+  ✓ You're on the list. Watch your inbox for launch updates.
+</div>
+
+<div
+  id="signup-error"
+  class="mt-4 hidden rounded-lg border border-danger/40 bg-danger/5 px-4 py-3 font-mono text-sm text-danger"
+>
+  ✗ Something went wrong. Try again or DM @kubesentry on X.
+</div>
+
+<script>
+  const form = document.getElementById('signup-form') as HTMLFormElement;
+  const success = document.getElementById('signup-success');
+  const error = document.getElementById('signup-error');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (form.elements.namedItem('email') as HTMLInputElement)?.value;
+
+    if (!email || !email.includes('@')) {
+      error?.classList.remove('hidden');
+      success?.classList.add('hidden');
+      return;
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // TODO: Replace this fetch with your ConvertKit/Buttondown endpoint.
+    // Example ConvertKit:
+    //   const res = await fetch('https://api.convertkit.com/v3/forms/YOUR_FORM_ID/subscribe', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ api_key: 'YOUR_API_KEY', email })
+    //   });
+    //
+    // Example Buttondown:
+    //   const res = await fetch('https://api.buttondown.email/v1/subscribers', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Authorization': 'Token YOUR_API_TOKEN',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ email })
+    //   });
+    // ─────────────────────────────────────────────────────────────
+
+    // For now: pretend it worked. Replace this block when you have ESP set up.
+    try {
+      // Store locally so visitor can see "already signed up" on return
+      localStorage.setItem('kubesentry_signup', email);
+      form.style.display = 'none';
+      success?.classList.remove('hidden');
+      error?.classList.add('hidden');
+    } catch {
+      error?.classList.remove('hidden');
+    }
+  });
+
+  // If user already signed up, hide form
+  if (typeof window !== 'undefined' && localStorage.getItem('kubesentry_signup')) {
+    form.style.display = 'none';
+    success?.classList.remove('hidden');
+  }
+</script>

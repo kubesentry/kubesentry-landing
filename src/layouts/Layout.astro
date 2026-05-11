@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'KubeSentry — Self-hosted Kubernetes threat detection',
+  description = 'Catch threats in your Kubernetes cluster before they catch you. Curated Falco rules, smart deduplication, beautiful email reports. Self-hosted. One-time license.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0a0a0b" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts: Geist + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="relative overflow-x-hidden">
+    <!-- Subtle scan-line decoration -->
+    <div
+      class="pointer-events-none fixed inset-0 z-[1] mix-blend-screen opacity-30"
+      aria-hidden="true"
+    >
+      <div class="scan-line absolute left-0 right-0 h-32 animate-scan"></div>
+    </div>
+
+    <main class="relative z-10">
+      <slot />
+    </main>
+
+    <style is:global>
+      /* Smooth scroll & font defaults */
+      html {
+        font-family: 'Geist', system-ui, sans-serif;
+      }
+    </style>
+  </body>
+</html>
