@@ -29,20 +29,35 @@ This repo is configured for Cloudflare Pages auto-deploy on `git push`.
 - Framework preset: `Astro`
 - Build command: `npm run build`
 - Build output directory: `dist`
-- Node version: `20` (set in env vars if needed: `NODE_VERSION=20`)
+- Node version: `20` (set in env vars: `NODE_VERSION=20`)
+
+**Environment variables (required for email signup):**
+- `BUTTONDOWN_API_KEY` — get from buttondown.email → Settings → Programming → API
 
 ## 📧 Email signup
 
-The signup form in `src/components/EmailSignup.astro` currently uses
-`localStorage` as a placeholder. To wire up a real email service provider,
-search for the `TODO: Replace this fetch` comment in that file and follow
-the inline examples for ConvertKit or Buttondown.
+The signup form posts to `/api/subscribe`, a Cloudflare Pages Function that
+proxies to Buttondown using the `BUTTONDOWN_API_KEY` env var. The token is
+server-side only and never exposed to the browser.
+
+To switch ESPs (MailerLite, Kit, etc.), modify `functions/api/subscribe.js`.
+
+### Testing locally with Wrangler
+
+Pages Functions don't run with `npm run dev` (which uses Astro's dev server).
+To test the `/api/subscribe` endpoint locally:
+
+```bash
+npm install -g wrangler
+npm run build
+wrangler pages dev ./dist --binding BUTTONDOWN_API_KEY=your_token_here
+```
 
 ## 📁 Structure
 
 ```
 src/
-├── components/      # reusable Astro components
+├── components/          # reusable Astro components
 │   ├── Logo.astro
 │   ├── DashboardMockup.astro
 │   ├── EmailSignup.astro
@@ -56,6 +71,10 @@ src/
 │   └── index.astro
 └── styles/
     └── global.css
+
+functions/
+└── api/
+    └── subscribe.js     # Cloudflare Pages Function → Buttondown
 
 public/
 └── favicon.svg
