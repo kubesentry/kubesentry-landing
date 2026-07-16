@@ -6,6 +6,7 @@
 // Prices are EUR because the Lemon Squeezy store charges in EUR — keep these
 // in sync with the store and with website/docs/licensing.md in the collector repo.
 // Cluster allowances mirror TIER_BY_VARIANT in license-server/src/index.ts.
+// Licenses are perpetual: one payment, all future updates, no renewal.
 const tiers = [
   {
     name: 'Solo',
@@ -38,7 +39,7 @@ const included = [
   'Full dashboard + alerting',
   'Curated ruleset + remediation advice',
   'Email, Slack, Discord, Teams',
-  '12 months of updates',
+  'All future updates, forever',
 ];
 ---
 
@@ -52,10 +53,9 @@ const included = [
         Pay once. Own it.
       </h2>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-text-dim">
-        A one-time payment, not a subscription. Every tier includes
-        <span class="text-text">12 months of updates</span>. After that, updates are
-        <span class="text-text">€49/year</span> — optional. Your install keeps running
-        either way; renewing only affects access to new versions.
+        One-time payment. Yours forever. Every tier includes
+        <span class="text-text">all future updates</span> — no subscription, no
+        renewals, ever.
       </p>
       <p class="mt-4 font-mono text-sm text-accent">
         7-day free trial · no credit card
@@ -88,8 +88,9 @@ const included = [
               <span class="font-display text-4xl font-bold tracking-tight text-text">
                 {tier.price}
               </span>
-              <span class="font-mono text-xs text-text-faint">one-time</span>
+              <span class="font-mono text-xs text-text-faint">once</span>
             </div>
+            <p class="mt-1.5 font-mono text-[11px] text-accent">perpetual license</p>
 
             <div class="mt-6 rounded-lg border border-line bg-bg/40 px-3 py-2 font-mono text-xs text-accent">
               {tier.clusters}
