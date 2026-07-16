@@ -7,11 +7,14 @@ interface Props {
 }
 
 const {
-  title = 'KubeSentry — Self-hosted Kubernetes threat detection',
-  description = 'Catch threats in your Kubernetes cluster before they catch you. Curated Falco rules, smart deduplication, beautiful email reports. Self-hosted. One-time license.',
+  title = 'KubeSentry — self-hosted runtime threat detection for Kubernetes',
+  description = 'Kernel-level runtime threat detection built on Falco, running entirely in your own cluster — no phone-home, no telemetry, your data never leaves. One-time license, 7-day free trial.',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Crawlers won't resolve a relative og:image — it has to be absolute.
+const ogImage = new URL('/og-image.png', Astro.site);
 ---
 
 <!doctype html>
@@ -31,14 +34,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="KubeSentry" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="KubeSentry — runtime threat detection for Kubernetes, self-hosted. Install with: helm install kubesentry kubesentry/kubesentry"
+    />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+    <meta
+      property="twitter:image:alt"
+      content="KubeSentry — runtime threat detection for Kubernetes, self-hosted. Install with: helm install kubesentry kubesentry/kubesentry"
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

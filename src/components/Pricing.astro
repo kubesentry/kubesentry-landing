@@ -1,0 +1,132 @@
+---
+// Pricing tiers.
+//
+// Checkout URLs are the LIVE Lemon Squeezy links (verified 2026-07-16: each
+// resolves to its matching plan, in live mode, at the price below).
+// Prices are EUR because the Lemon Squeezy store charges in EUR — keep these
+// in sync with the store and with website/docs/licensing.md in the collector repo.
+// Cluster allowances mirror TIER_BY_VARIANT in license-server/src/index.ts.
+const tiers = [
+  {
+    name: 'Solo',
+    price: '€99',
+    tagline: 'Individuals and very small clusters.',
+    clusters: '1 cluster',
+    url: 'https://kubesentry.lemonsqueezy.com/checkout/buy/fb9673c9-1ef8-48c6-a18f-417ffd52fec4',
+    featured: false,
+  },
+  {
+    name: 'Team',
+    price: '€299',
+    tagline: 'Small teams running a handful of clusters.',
+    clusters: '5 clusters',
+    url: 'https://kubesentry.lemonsqueezy.com/checkout/buy/a1b007ea-6037-48de-bf48-0f1a551848b9',
+    featured: true,
+  },
+  {
+    name: 'Pro',
+    price: '€499',
+    tagline: 'Larger deployments.',
+    clusters: 'Unlimited clusters',
+    url: 'https://kubesentry.lemonsqueezy.com/checkout/buy/1682bddc-7937-4457-a2ae-76555d903388',
+    featured: false,
+  },
+];
+
+// Identical across tiers — the tiers differ only by cluster allowance.
+const included = [
+  'Full dashboard + alerting',
+  'Curated ruleset + remediation advice',
+  'Email, Slack, Discord, Teams',
+  '12 months of updates',
+];
+---
+
+<section id="pricing" class="relative border-t border-line py-24">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mb-6">
+      <div class="mb-4 font-mono text-xs uppercase tracking-widest text-accent">
+        // pricing
+      </div>
+      <h2 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+        Pay once. Own it.
+      </h2>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-text-dim">
+        A one-time payment, not a subscription. Every tier includes
+        <span class="text-text">12 months of updates</span>. After that, updates are
+        <span class="text-text">€49/year</span> — optional. Your install keeps running
+        either way; renewing only affects access to new versions.
+      </p>
+      <p class="mt-4 font-mono text-sm text-accent">
+        7-day free trial · no credit card
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-6 md:grid-cols-3">
+      {
+        tiers.map((tier) => (
+          <div
+            class:list={[
+              'relative flex flex-col rounded-xl border bg-bg-elevated/30 p-6 transition',
+              tier.featured
+                ? 'border-accent/40 shadow-[0_0_40px_-12px_rgba(0,255,156,0.25)]'
+                : 'border-line hover:border-accent/25',
+            ]}
+          >
+            {tier.featured && (
+              <span class="absolute -top-3 left-6 rounded-full border border-accent/40 bg-bg px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-accent">
+                most popular
+              </span>
+            )}
+
+            <h3 class="font-display text-xl font-semibold text-text">{tier.name}</h3>
+            <p class="mt-2 min-h-[2.5rem] text-sm leading-relaxed text-text-dim">
+              {tier.tagline}
+            </p>
+
+            <div class="mt-6 flex items-baseline gap-2">
+              <span class="font-display text-4xl font-bold tracking-tight text-text">
+                {tier.price}
+              </span>
+              <span class="font-mono text-xs text-text-faint">one-time</span>
+            </div>
+
+            <div class="mt-6 rounded-lg border border-line bg-bg/40 px-3 py-2 font-mono text-xs text-accent">
+              {tier.clusters}
+            </div>
+
+            <ul class="mt-6 flex-1 space-y-2.5">
+              {included.map((item) => (
+                <li class="flex items-start gap-2.5 text-sm text-text-dim">
+                  <span class="mt-0.5 select-none font-mono text-accent" aria-hidden="true">
+                    ✓
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={tier.url}
+              class:list={[
+                'mt-8 block rounded-lg px-5 py-3 text-center font-display text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
+                tier.featured
+                  ? 'bg-accent text-bg hover:bg-accent-dim'
+                  : 'border border-line bg-bg/60 text-text hover:border-accent/40 hover:text-accent',
+              ]}
+            >
+              Buy {tier.name}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="mt-10 max-w-3xl text-sm leading-relaxed text-text-faint">
+      Checkout and invoicing are handled by Lemon Squeezy (our merchant of record); VAT
+      is calculated at checkout. Your license key is emailed to you automatically right
+      after purchase — apply it with <code class="font-mono text-text-dim">--set license=…</code>.
+      Don't want to buy yet? Install and run the 7-day trial first; it's the full product.
+    </p>
+  </div>
+</section>

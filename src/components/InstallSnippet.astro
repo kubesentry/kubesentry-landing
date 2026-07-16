@@ -1,0 +1,103 @@
+---
+// Copy-able install snippet for the hero.
+//
+// The release name MUST be "kubesentry": Falco posts events to a fixed Service
+// address (kubesentry-falcosidekick -> kubesentry-collector), so a different
+// release name silently breaks event delivery. Chart is kubesentry/kubesentry.
+// See website/docs/getting-started/installation.md in the collector repo.
+const lines = [
+  'helm repo add kubesentry https://charts.kubesentry.io',
+  'helm repo update',
+  'helm install kubesentry kubesentry/kubesentry \\',
+  '  --namespace kubesentry --create-namespace',
+];
+
+const copyText = lines.join('\n');
+---
+
+<div
+  class="group relative overflow-hidden rounded-xl border border-line bg-bg-elevated/50 backdrop-blur-sm"
+  data-install-snippet
+>
+  <!-- title bar -->
+  <div class="flex items-center justify-between border-b border-line px-4 py-2.5">
+    <span class="font-mono text-[11px] uppercase tracking-wider text-text-faint">
+      install
+    </span>
+    <button
+      type="button"
+      data-copy-button
+      data-copy-text={copyText}
+      class="flex items-center gap-1.5 rounded-md border border-line bg-bg/60 px-2.5 py-1 font-mono text-[11px] text-text-dim transition hover:border-accent/40 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+      aria-label="Copy install command to clipboard"
+    >
+      <svg
+        class="h-3 w-3"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+        data-copy-icon
+      >
+        <rect x="5.5" y="5.5" width="8" height="8" rx="1.5"></rect>
+        <path d="M10.5 5.5V4A1.5 1.5 0 0 0 9 2.5H4A1.5 1.5 0 0 0 2.5 4v5A1.5 1.5 0 0 0 4 10.5h1.5"></path>
+      </svg>
+      <span data-copy-label>Copy</span>
+    </button>
+  </div>
+
+  <!-- command body: scrolls on narrow screens rather than pushing the page wide.
+       Deliberately not a <pre>: inside one, the template's own newlines between
+       the mapped lines are preserved and render as blank rows. -->
+  <div class="overflow-x-auto px-4 py-4 font-mono text-[13px] leading-6 text-text sm:text-sm">
+    <code class="block">
+      {
+        lines.map((line) => (
+          <span class="block whitespace-pre">
+            <span class="select-none text-accent">$ </span>
+            {line}
+          </span>
+        ))
+      }
+    </code>
+  </div>
+</div>
+
+<script>
+  // Progressive enhancement: the snippet is readable/selectable without JS.
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-button]').forEach((button) => {
+    const label = button.querySelector('[data-copy-label]');
+    if (!label) return;
+
+    button.addEventListener('click', async () => {
+      const text = button.dataset.copyText ?? '';
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        // Older browsers / non-secure contexts: fall back to a temp textarea.
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+        } catch {
+          return; // Give up silently rather than lie that we copied.
+        } finally {
+          document.body.removeChild(ta);
+        }
+      }
+
+      label.textContent = 'Copied';
+      button.classList.add('text-accent', 'border-accent/40');
+      window.setTimeout(() => {
+        label.textContent = 'Copy';
+        button.classList.remove('text-accent', 'border-accent/40');
+      }, 1800);
+    });
+  });
+</script>
