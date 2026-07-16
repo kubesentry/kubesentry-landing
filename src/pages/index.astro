@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Logo from '../components/Logo.astro';
 import DashboardMockup from '../components/DashboardMockup.astro';
 import InstallSnippet from '../components/InstallSnippet.astro';
+import ClusterDiagram from '../components/ClusterDiagram.astro';
 import Pricing from '../components/Pricing.astro';
 import ComparisonRow from '../components/ComparisonRow.astro';
 
@@ -102,8 +103,8 @@ const GITHUB = 'https://github.com/kubesentry';
         style="animation: fadeInUp 0.8s 0.3s both;"
       >
         Kernel-level runtime threat detection built on Falco, running entirely
-        in your own cluster. No phone-home, no telemetry — your alerts and
-        cluster data never leave your infrastructure.
+        in your own cluster. No phone-home, no telemetry — nothing leaves
+        except the alerts you tell it to send, to the destinations you pick.
       </p>
 
       <!-- Feature badges -->
@@ -268,6 +269,9 @@ const GITHUB = 'https://github.com/kubesentry';
     </div>
   </section>
 
+  <!-- WHAT GETS INSTALLED -->
+  <ClusterDiagram />
+
   <!-- WHY -->
   <section class="relative border-t border-line py-24">
     <div class="mx-auto max-w-7xl px-6">
@@ -348,7 +352,7 @@ const GITHUB = 'https://github.com/kubesentry';
             },
             {
               q: 'Does it phone home?',
-              a: 'No. Air-gapped friendly. License keys are validated offline with Ed25519 signatures against a public key compiled into the collector — your cluster never talks to a license server. Your alerts and cluster data never leave your infrastructure.',
+              a: "No. There is no KubeSentry server your cluster talks to — not for telemetry, not even for licensing, which is verified offline with Ed25519 signatures against a public key compiled into the collector. Your alerts and cluster data stay put; the one exception is notifications, which go only to the destinations you configure (your Slack, your inbox). Turn those off and the cluster can be fully air-gapped.",
             },
             {
               q: 'What about Wazuh / Tetragon / Kubescape?',
