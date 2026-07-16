@@ -343,6 +343,10 @@ const GITHUB = 'https://github.com/kubesentry';
               a: 'No. Pay once, use forever — including all future updates. There is no renewal, no maintenance window, and no recurring charge of any kind. Your license is perpetual: it never expires, on any version.',
             },
             {
+              q: 'Is the cluster count enforced?',
+              a: "No. It's a licence term, not a technical limit — nothing in the collector counts your clusters, and a Solo key works anywhere you paste it. Enforcing it would mean every install reporting back to us, which is exactly the telemetry we promise never to send. You can verify that in the source. We'd rather trust you and keep the promise than police the count and break it.",
+            },
+            {
               q: 'Does it phone home?',
               a: 'No. Air-gapped friendly. License keys are validated offline with Ed25519 signatures against a public key compiled into the collector — your cluster never talks to a license server. Your alerts and cluster data never leave your infrastructure.',
             },

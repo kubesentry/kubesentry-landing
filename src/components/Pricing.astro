@@ -7,12 +7,17 @@
 // in sync with the store and with website/docs/licensing.md in the collector repo.
 // Cluster allowances mirror TIER_BY_VARIANT in license-server/src/index.ts.
 // Licenses are perpetual: one payment, all future updates, no renewal.
+//
+// The cluster count is a licence TERM, not a technical limit — nothing in the
+// collector checks it (enforcing it would need the phone-home we promise never
+// to do). Word it as a term, never as a capability, or the card implies a gate
+// that does not exist.
 const tiers = [
   {
     name: 'Solo',
     price: '€99',
     tagline: 'Individuals and very small clusters.',
-    clusters: '1 cluster',
+    clusters: 'Licensed for 1 cluster',
     url: 'https://kubesentry.lemonsqueezy.com/checkout/buy/fb9673c9-1ef8-48c6-a18f-417ffd52fec4',
     featured: false,
   },
@@ -20,7 +25,7 @@ const tiers = [
     name: 'Team',
     price: '€299',
     tagline: 'Small teams running a handful of clusters.',
-    clusters: '5 clusters',
+    clusters: 'Licensed for 5 clusters',
     url: 'https://kubesentry.lemonsqueezy.com/checkout/buy/a1b007ea-6037-48de-bf48-0f1a551848b9',
     featured: true,
   },
@@ -28,7 +33,7 @@ const tiers = [
     name: 'Pro',
     price: '€499',
     tagline: 'Larger deployments.',
-    clusters: 'Unlimited clusters',
+    clusters: 'Licensed for unlimited clusters',
     url: 'https://kubesentry.lemonsqueezy.com/checkout/buy/1682bddc-7937-4457-a2ae-76555d903388',
     featured: false,
   },
@@ -123,7 +128,26 @@ const included = [
       }
     </div>
 
-    <p class="mt-10 max-w-3xl text-sm leading-relaxed text-text-faint">
+    <div
+      class="mt-10 max-w-3xl rounded-xl border border-line bg-bg-elevated/30 p-5 text-sm leading-relaxed text-text-dim"
+    >
+      <p>
+        <span class="font-display font-semibold text-text">
+          Cluster counts are licence terms, not technical limits.
+        </span>
+        Nothing in the collector checks how many clusters you run — enforcing that would
+        mean phoning home, and we promise never to. So we trust you to buy the tier that
+        fits, and you get to verify that promise by
+        <a
+          href="https://github.com/kubesentry"
+          target="_blank"
+          rel="noopener"
+          class="text-accent underline decoration-accent/30 underline-offset-2 transition hover:decoration-accent"
+        >reading the code</a>.
+      </p>
+    </div>
+
+    <p class="mt-6 max-w-3xl text-sm leading-relaxed text-text-faint">
       Checkout and invoicing are handled by Lemon Squeezy (our merchant of record); VAT
       is calculated at checkout. Your license key is emailed to you automatically right
       after purchase — apply it with <code class="font-mono text-text-dim">--set license=…</code>.
