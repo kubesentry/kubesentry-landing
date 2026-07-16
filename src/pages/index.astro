@@ -5,7 +5,6 @@ import DashboardMockup from '../components/DashboardMockup.astro';
 import InstallSnippet from '../components/InstallSnippet.astro';
 import ClusterDiagram from '../components/ClusterDiagram.astro';
 import Pricing from '../components/Pricing.astro';
-import ComparisonRow from '../components/ComparisonRow.astro';
 
 const DOCS = 'https://docs.kubesentry.io';
 const GITHUB = 'https://github.com/kubesentry';
@@ -275,48 +274,26 @@ const GITHUB = 'https://github.com/kubesentry';
   <!-- WHY -->
   <section class="relative border-t border-line py-24">
     <div class="mx-auto max-w-7xl px-6">
-      <div class="grid gap-16 md:grid-cols-2 md:items-center">
-        <div>
-          <div class="mb-4 font-mono text-xs uppercase tracking-widest text-accent">
-            // why kubesentry
-          </div>
-          <h2 class="font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-            Enterprise security <br />
-            <span class="text-text-dim line-through decoration-danger/70 decoration-2"
-              >at enterprise prices.</span
-            >
-            <br />
-            <span class="text-accent">for €99.</span>
-          </h2>
-          <p class="mt-6 max-w-lg text-lg leading-relaxed text-text-dim">
-            Datadog. Sysdig. Aqua. Built for enterprises with security teams.
-            KubeSentry is built for the rest of us — the five-to-fifty-person
-            engineering org with real clusters and nobody whose full-time job is
-            security.
-          </p>
-        </div>
-
-        <div class="space-y-4">
-          <ComparisonRow
-            them="Datadog Cloud Security"
-            themPrice="$15+/host/mo"
-            mine="KubeSentry"
-            minePrice="€99 one-time"
-          />
-          <ComparisonRow
-            them="Sysdig Secure"
-            themPrice="$60+/host/mo"
-            mine="KubeSentry"
-            minePrice="€99 one-time"
-          />
-          <ComparisonRow
-            them="Aqua Enterprise"
-            themPrice="$Contact sales"
-            mine="KubeSentry"
-            minePrice="€99 one-time"
-          />
-        </div>
+      <div class="mb-4 font-mono text-xs uppercase tracking-widest text-accent">
+        // why kubesentry
       </div>
+      <h2 class="font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+        Enterprise security <br />
+        <span class="text-text-dim line-through decoration-danger/70 decoration-2"
+          >at enterprise prices.</span
+        >
+        <br />
+        <span class="text-accent">for €99.</span>
+      </h2>
+      <p class="mt-8 max-w-3xl text-lg leading-relaxed text-text-dim">
+        Datadog. Sysdig. Aqua. Built for enterprises with security teams, and sold as
+        subscriptions metered by how much you run — for as long as you run it.
+        KubeSentry is built for the rest of us: the five-to-fifty-person engineering
+        org with real clusters and nobody whose full-time job is security.
+      </p>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-text-dim">
+        You pay once. It runs in your cluster. Nobody meters your hosts.
+      </p>
     </div>
   </section>
 
