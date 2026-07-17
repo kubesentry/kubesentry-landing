@@ -60,8 +60,12 @@ const GITHUB = 'https://github.com/kubesentry';
           ></span>
           <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
         </span>
+        <!-- Deliberately no version number: this page lives in a different repo
+             from the chart with nothing syncing them, so a hardcoded version
+             silently goes stale on every release. `helm search repo kubesentry`
+             is always right by construction. -->
         <span class="text-text-dim">
-          <span class="text-text">v0.7.0 — available now</span>
+          <span class="text-text">Available now</span>
           <span class="mx-2 text-line">·</span>
           7-day free trial
         </span>
